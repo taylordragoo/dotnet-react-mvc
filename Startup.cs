@@ -1,3 +1,5 @@
+using dotnet_react_mvc.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using JavaScriptEngineSwitcher.V8;
 using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
@@ -34,6 +36,9 @@ namespace dotnet_react_mvc
             services.AddJsEngineSwitcher(options => options.DefaultEngineName = V8JsEngine.EngineName)
               .AddV8();
             services.AddControllersWithViews();
+            services.AddDbContext<CommentContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("CommentContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
